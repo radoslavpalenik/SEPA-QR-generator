@@ -33,7 +33,7 @@ QLabel{
     font-size: 15px;
 }
 
-QLineEdit, QDoubleSpinBox{
+QLineEdit, QDoubleSpinBox,QComboBox{
     color: #3A4750;
     height: 24px;
     font-size: 18px;
@@ -42,7 +42,7 @@ QLineEdit, QDoubleSpinBox{
     padding: 3px;
 }</string>
   </property>
-  <widget class="QWidget" name="widget" native="true">
+  <widget class="QWidget" name="currencyPicker" native="true">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -75,7 +75,7 @@ QLineEdit, QDoubleSpinBox{
     </property>
    </widget>
   </widget>
-  <widget class="QWidget" name="widget_2" native="true">
+  <widget class="QWidget" name="ibanField" native="true">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -84,8 +84,11 @@ QLineEdit, QDoubleSpinBox{
      <height>80</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>UpArrowCursor</cursorShape>
+   </property>
    <property name="toolTip">
-    <string>30 characters</string>
+    <string>15-33 characters</string>
    </property>
    <widget class="QLineEdit" name="IBAN">
     <property name="geometry">
@@ -97,7 +100,7 @@ QLineEdit, QDoubleSpinBox{
      </rect>
     </property>
     <property name="maxLength">
-     <number>30</number>
+     <number>33</number>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -114,7 +117,7 @@ QLineEdit, QDoubleSpinBox{
     </property>
    </widget>
   </widget>
-  <widget class="QWidget" name="widget_3" native="true">
+  <widget class="QWidget" name="swiftField" native="true">
    <property name="geometry">
     <rect>
      <x>10</x>
