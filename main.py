@@ -7,6 +7,7 @@ from PIL import ImageQt
 from PyQt6 import uic, QtWidgets
 from dialog import Dialog
 from parser import getAccount
+from parser import configChecker
 
 class UI(QMainWindow):
 
@@ -32,7 +33,6 @@ class UI(QMainWindow):
         self.labelQR = self.findChild(QLabel,'labelQR')
         
         self.generateBtn.clicked.connect(self.generate)
-        print(self.generateBtn.height())
 
         self.show()
 
@@ -73,6 +73,17 @@ class UI(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+
+    errCode = configChecker()
+
+    if errCode > 0:
+        msg = QMessageBox()
+        msg.setWindowTitle("Missing config data")
+        if errCode == 1:
+            msg.setText("Config file was not found.\n A new config file has been created.")
+        elif errCode == 2:
+            msg.setText("Some (or all) of config data not found.\n Account data were updated to default settings.")
+        x = msg.exec() 
 
     window = UI()
 
