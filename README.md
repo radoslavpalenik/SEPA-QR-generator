@@ -9,4 +9,7 @@ To run app through CLI type\
 `python main.py`\
 or use released EXE file.
 
+
+![Showcase of the GUI](https://cdn.discordapp.com/attachments/1006919030600368250/1072926013706731591/image.png)
+
 This application was made thanks to [PAY by square](https://github.com/matusf/pay-by-square) package.
