@@ -1,0 +1,4 @@
+PyQt6
+qrcode
+pay_by_square
+Pillow
