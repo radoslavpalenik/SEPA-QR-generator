@@ -7,8 +7,8 @@ from parser import setAccount
 
 class Dialog(QDialog):
     currencyList = ['EUR','BGN','HRK','CZK','DKK',
-                        'GIP','HUF','ISK','CHF','NOK',
-                        'PLN','RON','SEK','CHF','GBP']
+                    'GIP','HUF','ISK','CHF','NOK',
+                    'PLN','RON','SEK','CHF','GBP']
 
    
     def setup(self):
@@ -22,16 +22,16 @@ class Dialog(QDialog):
 
         storedCurrency =  account[2]
         
-
+        #If config holds invalid currency, invalidate it in the next account update
         if storedCurrency not in actualCurrencies:
             self.invalidate(self.currency)
             self.currency.addItem(storedCurrency)
             actualCurrencies.insert(0, storedCurrency)
 
+        #Gets list of supported currencies
         for cur in self.currencyList:
             self.currency.addItem(cur)
 
-        print(actualCurrencies)
         index = actualCurrencies.index(storedCurrency)
         self.currency.setCurrentIndex(index)
     
@@ -39,8 +39,6 @@ class Dialog(QDialog):
         super(Dialog, self).__init__()
         uic.loadUi('dialog.ui', self) 
 
-        
-        
         self.updBtn.clicked.connect(self.updateAcc)
         self.IBAN.textChanged.connect(self.ipnutChecker)
         self.SWIFT.textChanged.connect(self.ipnutChecker)
@@ -49,18 +47,19 @@ class Dialog(QDialog):
         self.setup()
         
         
-    
+    #Updates Account config
     def updateAcc(self):
         setAccount(self.IBAN.text(), self.SWIFT.text(), self.currency.currentText())
         self.close()
 
+    #Checks if any of input data are invalid
     def ipnutChecker(self):
 
         ibanLen = len(self.IBAN.text())
         swiftLen = len(self.SWIFT.text())
         curType = self.currency.currentText()
 
-
+        
         if ibanLen < 15 or swiftLen < 8 or swiftLen > 11 or curType not in self.currencyList:
             if ibanLen < 15:
                 self.invalidate(self.IBAN)
@@ -82,7 +81,8 @@ class Dialog(QDialog):
 
             self.updBtn.setStyleSheet("background-color: #00ADB5;color: #EEEEEE;")
             self.updBtn.setDisabled(False)
-        
+
+    #Forbids updating config while some of input data are not valid    
     def invalidate(self, field):
         field.setStyleSheet("border :3px solid red")
         self.updBtn.setStyleSheet("background-color: #303841;color: #7d7d7d")

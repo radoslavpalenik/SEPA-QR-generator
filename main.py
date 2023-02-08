@@ -10,7 +10,7 @@ from parser import getAccount
 from parser import configChecker
 
 class UI(QMainWindow):
-
+    #Opens dialog window
     def openDialog(self):
         self.window = QtWidgets.QDialog()
         self.ui = Dialog()
@@ -36,6 +36,7 @@ class UI(QMainWindow):
 
         self.show()
 
+    #Generates QR code from given values and stored account in config file
     def generate(self):
 
         account = getAccount()        
@@ -58,8 +59,7 @@ class UI(QMainWindow):
 
         self.copyBtn.setVisible(True)
         self.saveBtn.setVisible(True)
-        print(self.saveBtn.width())
-        print(self.generateBtn.height())
+
        
     def copyQR(self):
         clipboard = QApplication.clipboard()
@@ -74,6 +74,7 @@ class UI(QMainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
+    #Checks if config file is not missing and whether it contains valid options
     errCode = configChecker()
 
     if errCode > 0:

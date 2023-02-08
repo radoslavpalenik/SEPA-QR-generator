@@ -1,12 +1,14 @@
 from configparser import ConfigParser
 import os.path
+
+#Opens config file for further manipulation
 def openConfig():
     file='config.ini'
     cfg = ConfigParser()
     cfg.read(file)
     return cfg, file
 
-
+#Returns details of stored account
 def getAccount():
 
     cfg, file = openConfig()
@@ -18,6 +20,7 @@ def getAccount():
               ]    
     return details
 
+#Updates config file with given data
 def setAccount(IBAN, SWIFT, cur):
 
     accName = 'Account'
@@ -31,6 +34,7 @@ def setAccount(IBAN, SWIFT, cur):
     with open(file, 'w') as config:
         cfg.write(config)
 
+#Updates config with default data (if file is missing or corrupted)
 def writeDefaultConfig(cfg):
     
     cfg['Account'] = {
@@ -42,8 +46,7 @@ def writeDefaultConfig(cfg):
     with open("config.ini", "w") as f:
         cfg.write(f)
 
-        print("Default config created")
-
+#Checks if config data are present and valid
 def configChecker():
 
     if  not os.path.exists('config.ini'):
